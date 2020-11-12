@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mobile/app/shared/utils/constants.dart';
 
 class AppWidget extends StatelessWidget {
   @override
@@ -10,11 +11,11 @@ class AppWidget extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MQTT Mobile',
       theme: ThemeData(
-        primaryColor: Color(0xFF181818),
+        primaryColor: themeColors.primary,
         brightness: Brightness.light,
         scaffoldBackgroundColor: Colors.white,
         textTheme:
-            GoogleFonts.poppinsTextTheme().apply(displayColor: Color(0xFF181818)),
+            GoogleFonts.poppinsTextTheme().apply(displayColor: themeColors.primary),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       initialRoute: '/',

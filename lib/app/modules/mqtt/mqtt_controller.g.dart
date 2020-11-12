@@ -19,30 +19,101 @@ final $MqttController = BindInject(
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$MqttController on _MqttControllerBase, Store {
-  final _$valueAtom = Atom(name: '_MqttControllerBase.value');
+  final _$connectionStatusAtom =
+      Atom(name: '_MqttControllerBase.connectionStatus');
 
   @override
-  int get value {
-    _$valueAtom.reportRead();
-    return super.value;
+  ConnectionStatus get connectionStatus {
+    _$connectionStatusAtom.reportRead();
+    return super.connectionStatus;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.reportWrite(value, super.value, () {
-      super.value = value;
+  set connectionStatus(ConnectionStatus value) {
+    _$connectionStatusAtom.reportWrite(value, super.connectionStatus, () {
+      super.connectionStatus = value;
     });
+  }
+
+  final _$statusLampAtom = Atom(name: '_MqttControllerBase.statusLamp');
+
+  @override
+  StatusLamp get statusLamp {
+    _$statusLampAtom.reportRead();
+    return super.statusLamp;
+  }
+
+  @override
+  set statusLamp(StatusLamp value) {
+    _$statusLampAtom.reportWrite(value, super.statusLamp, () {
+      super.statusLamp = value;
+    });
+  }
+
+  final _$messageAtom = Atom(name: '_MqttControllerBase.message');
+
+  @override
+  String get message {
+    _$messageAtom.reportRead();
+    return super.message;
+  }
+
+  @override
+  set message(String value) {
+    _$messageAtom.reportWrite(value, super.message, () {
+      super.message = value;
+    });
+  }
+
+  final _$connectAsyncAction = AsyncAction('_MqttControllerBase.connect');
+
+  @override
+  Future<int> connect(String user, String password) {
+    return _$connectAsyncAction.run(() => super.connect(user, password));
   }
 
   final _$_MqttControllerBaseActionController =
       ActionController(name: '_MqttControllerBase');
 
   @override
-  void increment() {
+  dynamic setConnectionStatus(ConnectionStatus value) {
     final _$actionInfo = _$_MqttControllerBaseActionController.startAction(
-        name: '_MqttControllerBase.increment');
+        name: '_MqttControllerBase.setConnectionStatus');
     try {
-      return super.increment();
+      return super.setConnectionStatus(value);
+    } finally {
+      _$_MqttControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setStatusLamp(StatusLamp value) {
+    final _$actionInfo = _$_MqttControllerBaseActionController.startAction(
+        name: '_MqttControllerBase.setStatusLamp');
+    try {
+      return super.setStatusLamp(value);
+    } finally {
+      _$_MqttControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setMessage(String value) {
+    final _$actionInfo = _$_MqttControllerBaseActionController.startAction(
+        name: '_MqttControllerBase.setMessage');
+    try {
+      return super.setMessage(value);
+    } finally {
+      _$_MqttControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void disconnect() {
+    final _$actionInfo = _$_MqttControllerBaseActionController.startAction(
+        name: '_MqttControllerBase.disconnect');
+    try {
+      return super.disconnect();
     } finally {
       _$_MqttControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -51,7 +122,9 @@ mixin _$MqttController on _MqttControllerBase, Store {
   @override
   String toString() {
     return '''
-value: ${value}
+connectionStatus: ${connectionStatus},
+statusLamp: ${statusLamp},
+message: ${message}
     ''';
   }
 }

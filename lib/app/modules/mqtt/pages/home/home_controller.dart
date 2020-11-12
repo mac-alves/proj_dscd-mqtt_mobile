@@ -1,3 +1,5 @@
+import 'package:mobile/app/modules/mqtt/mqtt_controller.dart';
+import 'package:mobile/app/modules/mqtt/utils/enums.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -7,11 +9,16 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
-  @observable
-  int value = 0;
+  
+  MqttController mqtt;
 
-  @action
-  void increment() {
-    value++;
+  _HomeControllerBase(this.mqtt);
+
+  void sendStatus(){
+    mqtt.sendComandLamp(
+      mqtt.statusLamp == StatusLamp.ON 
+        ? StatusLamp.OFF 
+        : StatusLamp.ON
+    );
   }
 }
