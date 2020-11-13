@@ -14,7 +14,7 @@ abstract class _MqttControllerBase with Store {
  
   String host = '192.168.100.101';
 
-  final String clientId = 'mqtt_mobile';
+  final String clientId = 'mb';
   final String topicJoker = 'mqtt_proj';
   final String topicConnection = 'mqtt_proj/connected';
 
@@ -40,8 +40,8 @@ abstract class _MqttControllerBase with Store {
   @action
   setMessage(String value) => message = value;
   
-  configureStatusLamp(String msg){
-    if (comandsReceived[msg] != null) {
+  configureStatusLamp(String topic, String msg){
+    if (topic == '$topicJoker/$clientId/state' && comandsReceived[msg] != null) {
       setStatusLamp(comandsReceived[msg]);
     }
   }
@@ -102,7 +102,7 @@ abstract class _MqttControllerBase with Store {
       final pt = MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
 
       print('MQTT::Topico:: <${c[0].topic}>, Menssage:: <-- $pt -->');
-      configureStatusLamp(pt);
+      configureStatusLamp(c[0].topic, pt);
     });
 
     /// verifica todas as mensagens recebidas a partir do topico coringa
@@ -168,5 +168,6 @@ abstract class _MqttControllerBase with Store {
   // PING response received
   void pong() {
     print('MQTT::Ping de resposta invocado.');
+    sendStatus(1);
   }
 }
